@@ -1,39 +1,15 @@
-# ---------------------------------------------------------------------
-# Assessment Given Libs
-# ---------------------------------------------------------------------
-matplotlib>=3.8,<4 # for Visualization  
-numpy>=1.26,<3  # fast c type computational arrays
-pandas>=2.0,<3  # for faster datafrms
-
-# ---------------------------------------------------------------------
-# Machine Learning
-# ---------------------------------------------------------------------
-scikit-learn>=1.5,<2 # to import diff models and algorithms
-scipy>=1.13,<2   # scitific calculatoin at c level speed with python level member fun calls
-joblib>=1.4,<2   # used by sk-learn
-
-# Gradient Boosting
-lightgbm>=4.5,<5
-xgboost>=2.1,<3
-catboost>=1.2.10,<2
-
-
-# API
-fastapi>=0.141,<1           # serving model vie http
-uvicorn[standard]>=0.34,<1  # server for serving 
-pydantic>=2.12,<3           # for validatoin and parsing
-
-# Configuration
-PyYAML>=6,<7
-python-dotenv>=1,<2
-
-# Utilities
-tqdm>=4.66,<5 # smart, moving progress bars for loops and data tasks
-
-# Testing
-pytest>=8,<9
-
-# Code Quality
-ruff>=0.12,<1
-black>=25,<26
-
+joblib==1.5.1
+matplotlib==3.10.3
+numpy==2.2.6
+pandas==2.3.1
+pydantic==2.11.7
+PyYAML==6.0.2
+scikit-learn==1.7.0
+seaborn==0.13.2
+scipy==1.15.3
+pytest==8.4.1
+python-docx==1.1.2
+fastapi==0.115.12
+uvicorn[standard]==0.34.2
+httpx==0.28.1
+torch==2.7.1

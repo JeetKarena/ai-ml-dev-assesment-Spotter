@@ -1,34 +1,32 @@
 project:
   name: Freight Rate Prediction Assessment
   version: "1.0.0"
-  author: "Your Name"
+  author: "Candidate"
   random_seed: 42
 
 paths:
-  train_data: "data/train_test.csv"
+  train_data: "data/train-test.csv"
   validation_data: "data/validation.csv"
-  validation_template: "data/validation_predictions_template.csv"
-  december_data: "data/december_chart_inputs.csv"
-
+  validation_template: "data/validation-predictions-template.csv"
+  december_data: "data/december-chart-inputs.csv"
   artifacts_dir: "artifacts"
   outputs_dir: "outputs"
   reports_dir: "reports"
 
 training:
   validation_size: 0.20
-  time_series_split: true
   cv_folds: 5
+  date_column: "date"
+  target_column: "posted_rate"
 
-models:
-  use_lightgbm: true
-  use_xgboost: true
-  use_catboost: true
-  use_hist_gradient_boosting: true
+model:
+  name: "hist_gradient_boosting"
+  max_iter: 250
+  learning_rate: 0.04
+  max_leaf_nodes: 12
+  min_samples_leaf: 80
+  l2_regularization: 20.0
 
 logging:
   level: INFO
-  format: "%(asctime)s | %(levelname)-8s | %(name)s | %(message)s"
-
-api:
-  host: "0.0.0.0"
-  port: 8000
+  format: "%(asctime)s [%(levelname)s] %(name)s: %(message)s"
