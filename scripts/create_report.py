@@ -463,9 +463,7 @@ def build():
         "The entire end-to-end workflow is containerized using Docker"
         " to guarantee complete reproducibility across operating systems:"
     )
-    add_bullet(
-        doc, "Build Container: docker build -t spotter-assessment ."
-    )
+    add_bullet(doc, "Build Container: docker build -t spotter-assessment .")
     add_bullet(
         doc,
         "Run Batch Pipeline: docker run --rm"

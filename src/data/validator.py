@@ -192,8 +192,7 @@ class DataValidator:
                     ValidationIssue(
                         severity=Severity.WARNING,
                         message=(
-                            f"{duplicates} duplicate rows detected,"
-                            " but duplicates are allowed by schema."
+                            f"{duplicates} duplicate rows detected," " but duplicates are allowed by schema."
                         ),
                     )
                 )
