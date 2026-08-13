@@ -1,7 +1,7 @@
 project:
   name: Freight Rate Prediction Assessment
   version: "1.0.0"
-  author: "Candidate"
+  author: "Jeet"
   random_seed: 42
 
 paths:
