@@ -7,7 +7,7 @@ cleaning, feature engineering, evaluation, or model training.
 
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from enum import StrEnum
 from pathlib import Path
 
@@ -224,5 +224,5 @@ class DataLoader:
             file_path=file_path,
             rows=int(dataframe.shape[0]),
             columns=int(dataframe.shape[1]),
-            loaded_at=datetime.now(timezone.utc),
+            loaded_at=datetime.now(UTC),
         )

@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from enum import StrEnum
 
 import pandas as pd
@@ -118,7 +118,7 @@ class DataValidator:
         report = ValidationReport(
             issues=issues,
             is_valid=not any(issue.severity == Severity.ERROR for issue in issues),
-            validated_at=datetime.now(timezone.utc),
+            validated_at=datetime.now(UTC),
         )
 
         if report.is_valid:
