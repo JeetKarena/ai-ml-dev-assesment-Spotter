@@ -4,8 +4,8 @@ from __future__ import annotations
 
 from fastapi import APIRouter
 
-from api.schemas import MetadataResponse
 from api.config import API_VERSION, MODEL_PATH
+from api.schemas import MetadataResponse
 
 router = APIRouter(tags=["Operations"])
 

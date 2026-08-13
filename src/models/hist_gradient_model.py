@@ -6,9 +6,10 @@ import numpy as np
 import pandas as pd
 from sklearn.ensemble import HistGradientBoostingRegressor
 from sklearn.pipeline import Pipeline
-from src.models.base import BaseModel
-from src.features.pipeline import build_preprocessor
+
 from src.core.settings import settings
+from src.features.pipeline import build_preprocessor
+from src.models.base import BaseModel
 
 
 class HistGradientModel(BaseModel):
@@ -24,7 +25,9 @@ class HistGradientModel(BaseModel):
             "min_samples_leaf": int(kwargs.get("min_samples_leaf", cfg.get("min_samples_leaf", 80))),
             "l2_regularization": float(kwargs.get("l2_regularization", cfg.get("l2_regularization", 20.0))),
             "early_stopping": kwargs.get("early_stopping", False),
-            "random_state": int(kwargs.get("random_state", settings.get("project", "random_seed", default=42))),
+            "random_state": int(
+                kwargs.get("random_state", settings.get("project", "random_seed", default=42))
+            ),
         }
         self.pipeline = Pipeline(
             steps=[

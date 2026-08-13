@@ -4,9 +4,9 @@ from __future__ import annotations
 
 from fastapi import APIRouter, HTTPException
 
+from api.core.exceptions import SpotterError
 from api.schemas import FreightLoad, PredictionResponse
 from api.services.prediction_service import predict as run_prediction
-from api.core.exceptions import SpotterError
 
 router = APIRouter(tags=["Inference"])
 

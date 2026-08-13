@@ -12,7 +12,11 @@ def clean_dataset(df: pd.DataFrame) -> pd.DataFrame:
             if pd.api.types.is_numeric_dtype(cleaned[column]):
                 cleaned[column] = cleaned[column].fillna(cleaned[column].median())
             else:
-                cleaned[column] = cleaned[column].fillna(cleaned[column].mode(dropna=True).iloc[0] if not cleaned[column].mode(dropna=True).empty else "unknown")
+                cleaned[column] = cleaned[column].fillna(
+                    cleaned[column].mode(dropna=True).iloc[0]
+                    if not cleaned[column].mode(dropna=True).empty
+                    else "unknown"
+                )
 
     for column in cleaned.columns:
         if pd.api.types.is_object_dtype(cleaned[column]):

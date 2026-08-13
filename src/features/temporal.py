@@ -30,7 +30,7 @@ def make_temporal_features(df: pd.DataFrame, date_column: str = "date") -> pd.Da
     # US Holiday projections
     years = date.dt.year.astype(str)
     christmas = pd.to_datetime(years + "-12-25")
-    
+
     # Thanksgiving is the 4th Thursday in November
     thanksgiving = pd.to_datetime(years + "-11-01")
     thanksgiving += pd.to_timedelta((3 - thanksgiving.dt.dayofweek) % 7 + 21, unit="D")

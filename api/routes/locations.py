@@ -5,7 +5,7 @@ from __future__ import annotations
 from fastapi import APIRouter
 from pydantic import BaseModel
 
-from api.services.location_service import list_locations, list_equipment
+from api.services.location_service import list_equipment, list_locations
 
 router = APIRouter(tags=["Reference"])
 

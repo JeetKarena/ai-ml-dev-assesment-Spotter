@@ -16,12 +16,14 @@ def route_features(df: pd.DataFrame) -> pd.DataFrame:
     """
     res = df.copy()
     res["route"] = res["pickup"].astype(str) + " -> " + res["delivery"].astype(str)
-    
+
     distance = pd.to_numeric(res["distance"], errors="coerce")
-    res["distance_bucket"] = pd.cut(
-        distance, bins=[-np.inf, 250, 750, np.inf], labels=["short", "medium", "long"]
-    ).astype("object").fillna("unknown")
-    
+    res["distance_bucket"] = (
+        pd.cut(distance, bins=[-np.inf, 250, 750, np.inf], labels=["short", "medium", "long"])
+        .astype("object")
+        .fillna("unknown")
+    )
+
     res["equipment_x_distance"] = res["equipment"].astype(str) + "_" + res["distance_bucket"].astype(str)
     res["distance_per_weight"] = distance / res["weight"]
     res["weight_x_distance"] = res["weight"] * distance

@@ -7,10 +7,9 @@ cleaning, feature engineering, evaluation, or model training.
 
 from __future__ import annotations
 
-from datetime import datetime
-from enum import Enum
+from datetime import datetime, timezone
+from enum import StrEnum
 from pathlib import Path
-from typing import Any
 
 import pandas as pd
 from pydantic import BaseModel, ConfigDict
@@ -21,7 +20,7 @@ from src.core.settings import settings
 logger = get_logger("spotter.data.loader")
 
 
-class DatasetType(str, Enum):
+class DatasetType(StrEnum):
     """Canonical dataset identifiers used across the project."""
 
     TRAIN = "train"
@@ -71,7 +70,9 @@ class DataLoader:
             project_root: Optional explicit project root. Defaults to the
                 repository root inferred from the current module location.
         """
-        self.project_root = Path(project_root) if project_root is not None else Path(__file__).resolve().parents[2]
+        self.project_root = (
+            Path(project_root) if project_root is not None else Path(__file__).resolve().parents[2]
+        )
         self.config_paths = {
             DatasetType.TRAIN: settings.get("paths", "train_data"),
             DatasetType.VALIDATION: settings.get("paths", "validation_data"),
@@ -205,7 +206,9 @@ class DataLoader:
 
         return dataframe
 
-    def _build_metadata(self, dataset_type: DatasetType, file_path: Path, dataframe: pd.DataFrame) -> DatasetMetadata:
+    def _build_metadata(
+        self, dataset_type: DatasetType, file_path: Path, dataframe: pd.DataFrame
+    ) -> DatasetMetadata:
         """Build a Pydantic metadata object for a loaded dataset.
 
         Args:
@@ -221,5 +224,5 @@ class DataLoader:
             file_path=file_path,
             rows=int(dataframe.shape[0]),
             columns=int(dataframe.shape[1]),
-            loaded_at=datetime.utcnow(),
+            loaded_at=datetime.now(timezone.utc),
         )

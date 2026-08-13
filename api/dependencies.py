@@ -7,8 +7,8 @@ makes the service easy to test with overrides.
 
 from __future__ import annotations
 
-from api.services.model_service import load_model
 from api.core.exceptions import ModelNotReadyError
+from api.services.model_service import load_model
 
 
 def get_model():

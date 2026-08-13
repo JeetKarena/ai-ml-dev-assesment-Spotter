@@ -4,11 +4,12 @@ from __future__ import annotations
 
 import numpy as np
 import pandas as pd
+from sklearn.ensemble import GradientBoostingRegressor, RandomForestRegressor
 from sklearn.linear_model import Ridge
-from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
 from sklearn.pipeline import Pipeline
-from src.models.base import BaseModel
+
 from src.features.pipeline import build_preprocessor
+from src.models.base import BaseModel
 
 
 class MeanBaseline(BaseModel):
@@ -23,7 +24,7 @@ class MeanBaseline(BaseModel):
         df = X.copy()
         df["target"] = y
         self.global_median = float(df["target"].median())
-        
+
         # Calculate median target for each group
         grouped = df.groupby(self.group_cols)["target"].median()
         self.group_rates = grouped.to_dict()
@@ -70,12 +71,15 @@ class RandomForestModel(BaseModel):
         self.pipeline = Pipeline(
             steps=[
                 ("preprocess", build_preprocessor()),
-                ("model", RandomForestRegressor(
-                    n_estimators=self.n_estimators,
-                    max_depth=self.max_depth,
-                    random_state=self.random_state,
-                    n_jobs=-1
-                )),
+                (
+                    "model",
+                    RandomForestRegressor(
+                        n_estimators=self.n_estimators,
+                        max_depth=self.max_depth,
+                        random_state=self.random_state,
+                        n_jobs=-1,
+                    ),
+                ),
             ]
         )
 
@@ -97,11 +101,14 @@ class GradientBoostingModel(BaseModel):
         self.pipeline = Pipeline(
             steps=[
                 ("preprocess", build_preprocessor()),
-                ("model", GradientBoostingRegressor(
-                    n_estimators=self.n_estimators,
-                    learning_rate=self.learning_rate,
-                    random_state=self.random_state
-                )),
+                (
+                    "model",
+                    GradientBoostingRegressor(
+                        n_estimators=self.n_estimators,
+                        learning_rate=self.learning_rate,
+                        random_state=self.random_state,
+                    ),
+                ),
             ]
         )
 

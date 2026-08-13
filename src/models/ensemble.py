@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import numpy as np
 import pandas as pd
+
 from src.models.base import BaseModel
 
 
@@ -37,7 +38,9 @@ class WeightedEnsembleModel(BaseModel):
         return np.sum(predictions, axis=0)
 
 
-def build_ensemble(models: list[BaseModel] | None = None, weights: list[float] | None = None) -> WeightedEnsembleModel:
+def build_ensemble(
+    models: list[BaseModel] | None = None, weights: list[float] | None = None
+) -> WeightedEnsembleModel:
     """Helper function to build a WeightedEnsembleModel.
 
     Args:
@@ -50,5 +53,6 @@ def build_ensemble(models: list[BaseModel] | None = None, weights: list[float] |
     if not models:
         from src.models.hist_gradient_model import HistGradientModel
         from src.models.sklearn_models import RidgeRegressionModel
+
         models = [HistGradientModel(), RidgeRegressionModel()]
     return WeightedEnsembleModel(models=models, weights=weights)

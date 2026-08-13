@@ -2,11 +2,9 @@
 
 from __future__ import annotations
 
-import numpy as np
-
+from api.core.exceptions import ModelNotReadyError, PredictionError
 from api.services.model_service import load_model
 from api.services.preprocessing_service import preprocess
-from api.core.exceptions import ModelNotReadyError, PredictionError
 
 
 def predict(payload: dict) -> float:

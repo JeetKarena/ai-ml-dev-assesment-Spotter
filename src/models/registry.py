@@ -2,19 +2,18 @@
 
 from __future__ import annotations
 
-from typing import Type
 from src.models.base import BaseModel
-from src.models.hist_gradient_model import HistGradientModel
-from src.models.sklearn_models import (
-    MeanBaseline,
-    RidgeRegressionModel,
-    RandomForestModel,
-    GradientBoostingModel,
-)
-from src.models.ensemble import WeightedEnsembleModel
-from src.models.xgboost_model import XGBoostModel
-from src.models.lightgbm_model import LightGBMModel
 from src.models.catboost_model import CatBoostModel
+from src.models.ensemble import WeightedEnsembleModel
+from src.models.hist_gradient_model import HistGradientModel
+from src.models.lightgbm_model import LightGBMModel
+from src.models.sklearn_models import (
+    GradientBoostingModel,
+    MeanBaseline,
+    RandomForestModel,
+    RidgeRegressionModel,
+)
+from src.models.xgboost_model import XGBoostModel
 
 
 class ModelRegistry:
@@ -33,7 +32,7 @@ class ModelRegistry:
             "catboost": CatBoostModel,
         }
 
-    def register(self, name: str, model_cls: Type[BaseModel]) -> Type[BaseModel]:
+    def register(self, name: str, model_cls: type[BaseModel]) -> type[BaseModel]:
         """Register a new model class under a custom name."""
         self._models[name] = model_cls
         return model_cls
@@ -50,7 +49,9 @@ class ModelRegistry:
         """
         model_cls = self._models.get(name)
         if model_cls is None:
-            raise KeyError(f"Model '{name}' is not registered. Registered models: {list(self._models.keys())}")
+            raise KeyError(
+                f"Model '{name}' is not registered. Registered models: {list(self._models.keys())}"
+            )
         return model_cls(**kwargs)
 
 

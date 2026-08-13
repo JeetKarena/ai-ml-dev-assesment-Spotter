@@ -19,8 +19,7 @@ def validate_shapes(y_true, y_pred) -> None:
     predicted = np.asarray(y_pred)
     if actual.shape != predicted.shape:
         raise ValueError(
-            f"Shape mismatch: y_true has shape {actual.shape} "
-            f"but y_pred has shape {predicted.shape}."
+            f"Shape mismatch: y_true has shape {actual.shape} " f"but y_pred has shape {predicted.shape}."
         )
 
 

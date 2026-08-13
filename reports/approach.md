@@ -12,7 +12,7 @@ The development file contains 48,000 loads, 0 duplicate rows, and 0 duplicate lo
 
 Features include origin, destination, route, equipment, coordinates, distance, weight, market index, quote signal, and calendar seasonality (weekday, month, day-of-year, and cyclic month/weekday terms). `load_id` is excluded because it is an identifier, not a pricing signal.
 
-I compared the selected model against a median-rate baseline on the same future holdout. The baseline MAE was $1,148.92; the regularized HistGradientBoosting model reduced it to $113.05 (RMSE $632.80, MAPE 5.15%, R-squared 0.828). Model capacity is deliberately constrained with shallow trees, a minimum of 80 observations per leaf, and L2 regularization. I also recorded expanding forward-fold results to check that performance is not dependent on a single date split. After evaluation, the final model is refit on all labelled development data for submission predictions.
+I compared the selected model against a median-rate baseline on the same future holdout. The baseline MAE was $1,148.92; the regularized HistGradientBoosting model reduced it to $114.40 (RMSE $633.40, MAPE 5.19%, R-squared 0.828). Model capacity is deliberately constrained with shallow trees, a minimum of 80 observations per leaf, and L2 regularization. I also recorded expanding forward-fold results to check that performance is not dependent on a single date split. After evaluation, the final model is refit on all labelled development data for submission predictions.
 
 ## Reproduction
 

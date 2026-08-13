@@ -5,16 +5,16 @@ from __future__ import annotations
 import pytest
 
 from api.services.location_service import (
-    normalize_location,
-    normalize_equipment,
-    list_locations,
     list_equipment,
+    list_locations,
+    normalize_equipment,
+    normalize_location,
 )
-
 
 # ---------------------------------------------------------------------------
 # normalize_location
 # ---------------------------------------------------------------------------
+
 
 class TestNormalizeLocation:
     def test_title_case_passes_through(self):
@@ -61,6 +61,7 @@ class TestNormalizeLocation:
 # ---------------------------------------------------------------------------
 # normalize_equipment
 # ---------------------------------------------------------------------------
+
 
 class TestNormalizeEquipment:
     def test_title_case_passes_through(self):

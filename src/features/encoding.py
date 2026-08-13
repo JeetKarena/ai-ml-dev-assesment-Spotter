@@ -14,9 +14,7 @@ class SafeOrdinalEncoder(BaseEstimator, TransformerMixin):
         self.categories = categories
         self.unknown_value = unknown_value
         self.encoder = OrdinalEncoder(
-            categories=self.categories,
-            handle_unknown="use_encoded_value",
-            unknown_value=self.unknown_value
+            categories=self.categories, handle_unknown="use_encoded_value", unknown_value=self.unknown_value
         )
 
     def fit(self, X: pd.DataFrame, y: pd.Series | None = None) -> SafeOrdinalEncoder:

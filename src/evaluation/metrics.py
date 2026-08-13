@@ -14,7 +14,9 @@ def compute_metrics(y_true, y_pred) -> dict[str, float]:
         "mae": round(float(mean_absolute_error(actual, predicted)), 4),
         "rmse": round(float(mean_squared_error(actual, predicted) ** 0.5), 4),
         "r2": round(float(r2_score(actual, predicted)), 4),
-        "mape": round(float(np.mean(np.abs((actual - predicted) / np.maximum(np.abs(actual), 1e-8))) * 100), 4),
+        "mape": round(
+            float(np.mean(np.abs((actual - predicted) / np.maximum(np.abs(actual), 1e-8))) * 100), 4
+        ),
         "median_ae": round(float(np.median(np.abs(actual - predicted))), 4),
         "n_samples": int(actual.size),
     }

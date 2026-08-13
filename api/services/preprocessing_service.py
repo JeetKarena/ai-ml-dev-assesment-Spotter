@@ -9,9 +9,9 @@ from __future__ import annotations
 
 import pandas as pd
 
-from src.features.pipeline import make_model_features
 from api.core.exceptions import PredictionError
-from api.services.location_service import normalize_location, normalize_equipment
+from api.services.location_service import normalize_equipment, normalize_location
+from src.features.pipeline import make_model_features
 
 
 def preprocess(payload: dict) -> pd.DataFrame:

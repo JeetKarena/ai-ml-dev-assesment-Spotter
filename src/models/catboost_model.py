@@ -4,8 +4,9 @@ from __future__ import annotations
 
 import numpy as np
 import pandas as pd
-from src.models.base import BaseModel
+
 from src.features.pipeline import build_preprocessor
+from src.models.base import BaseModel
 
 
 class CatBoostModel(BaseModel):
@@ -20,6 +21,7 @@ class CatBoostModel(BaseModel):
             ) from exc
 
         from sklearn.pipeline import Pipeline
+
         self.pipeline = Pipeline(
             steps=[
                 ("preprocess", build_preprocessor()),

@@ -10,7 +10,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-
 EXPECTED_ROWS = 12_000
 EXPECTED_IDS = {f"TE-{index:06d}" for index in range(1, EXPECTED_ROWS + 1)}
 DECEMBER_DATES = pd.date_range("2025-12-01", "2025-12-31", freq="D")
@@ -54,8 +53,7 @@ def validate_predictions(predictions: pd.DataFrame) -> None:
     extra = submitted_ids - EXPECTED_IDS
     if missing or extra:
         fail(
-            "prediction IDs do not match the validation set "
-            f"(missing={len(missing)}, extra={len(extra)})"
+            "prediction IDs do not match the validation set " f"(missing={len(missing)}, extra={len(extra)})"
         )
 
     predicted_rate = numeric_series(predictions, "predicted_rate", "predictions")
@@ -114,7 +112,9 @@ def save_december_chart(december: pd.DataFrame, output: Path) -> None:
         color=color,
         alpha=0.08,
     )
-    axis.set_title("Candidate: December 2025 Predicted Load Rate", loc="left", fontsize=15, fontweight="bold", pad=12)
+    axis.set_title(
+        "Candidate: December 2025 Predicted Load Rate", loc="left", fontsize=15, fontweight="bold", pad=12
+    )
     axis.set_ylabel("Predicted rate ($)")
     axis.grid(axis="y", color="#D9E2E4", linewidth=0.8)
     axis.spines[["top", "right"]].set_visible(False)

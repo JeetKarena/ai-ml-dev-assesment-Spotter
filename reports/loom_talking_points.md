@@ -33,7 +33,7 @@ it is an identifier, not a pricing driver. I used a single
 HistGradientBoosting model. It captures non-linear interactions such as route
 and equipment effects without the extra operational complexity of an ensemble.
 On the chronological holdout it reduced MAE from $1,148.92 for the median-rate
-baseline to $152.35, with an R-squared of 0.823.
+baseline to $114.40, with an R-squared of 0.828.
 
 ## 2:05-2:35 - Code and outputs
 

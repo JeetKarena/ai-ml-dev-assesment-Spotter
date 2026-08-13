@@ -18,7 +18,7 @@ from typing import Final
 # ---------------------------------------------------------------------------
 # Canonical values extracted from the training data at import time
 # ---------------------------------------------------------------------------
-_TRAINING_CSV: Final[Path] = Path(__file__).resolve().parents[3] / "data" / "train-test.csv"
+_TRAINING_CSV: Final[Path] = Path(__file__).resolve().parents[2] / "data" / "train-test.csv"
 
 
 def _load_canonical(column: str) -> frozenset[str]:
@@ -48,14 +48,13 @@ _LOCATION_LOOKUP: Final[dict[str, str]] = {
     re.sub(r"\s+", " ", loc).lower(): loc
     for loc in VALID_PICKUPS | VALID_DELIVERIES
 }
-_EQUIPMENT_LOOKUP: Final[dict[str, str]] = {
-    equip.lower(): equip for equip in VALID_EQUIPMENT
-}
+_EQUIPMENT_LOOKUP: Final[dict[str, str]] = {equip.lower(): equip for equip in VALID_EQUIPMENT}
 
 
 # ---------------------------------------------------------------------------
 # Public normalizers
 # ---------------------------------------------------------------------------
+
 
 def normalize_location(raw: str, field: str = "location") -> str:
     """Resolve a user-supplied city name to its canonical training-set form.
@@ -89,10 +88,7 @@ def normalize_location(raw: str, field: str = "location") -> str:
             return canonical_name
 
     valid = sorted(_LOCATION_LOOKUP.values())
-    raise ValueError(
-        f"'{raw}' is not a recognised {field}. "
-        f"Valid locations ({len(valid)}): {valid}"
-    )
+    raise ValueError(f"'{raw}' is not a recognised {field}. " f"Valid locations ({len(valid)}): {valid}")
 
 
 def normalize_equipment(raw: str) -> str:
@@ -112,10 +108,7 @@ def normalize_equipment(raw: str) -> str:
         return _EQUIPMENT_LOOKUP[key]
 
     valid = sorted(VALID_EQUIPMENT)
-    raise ValueError(
-        f"'{raw}' is not a recognised equipment type. "
-        f"Valid equipment types: {valid}"
-    )
+    raise ValueError(f"'{raw}' is not a recognised equipment type. " f"Valid equipment types: {valid}")
 
 
 def list_locations() -> list[str]:

@@ -2,9 +2,8 @@
 
 from __future__ import annotations
 
-from datetime import datetime
-from enum import Enum
-from typing import Any
+from datetime import datetime, timezone
+from enum import StrEnum
 
 import pandas as pd
 from pydantic import BaseModel
@@ -15,7 +14,7 @@ from src.core.settings import settings
 logger = get_logger("spotter.data.validator")
 
 
-class Severity(str, Enum):
+class Severity(StrEnum):
     """Severity for individual validation findings."""
 
     INFO = "info"
@@ -119,7 +118,7 @@ class DataValidator:
         report = ValidationReport(
             issues=issues,
             is_valid=not any(issue.severity == Severity.ERROR for issue in issues),
-            validated_at=datetime.utcnow(),
+            validated_at=datetime.now(timezone.utc),
         )
 
         if report.is_valid:
@@ -192,7 +191,10 @@ class DataValidator:
                 issues.append(
                     ValidationIssue(
                         severity=Severity.WARNING,
-                        message=f"{duplicates} duplicate rows detected, but duplicates are allowed by schema.",
+                        message=(
+                            f"{duplicates} duplicate rows detected,"
+                            " but duplicates are allowed by schema."
+                        ),
                     )
                 )
             else:
@@ -222,7 +224,10 @@ class DataValidator:
                         ValidationIssue(
                             severity=Severity.ERROR,
                             column=column,
-                            message=f"Missing values exceed the allowed ratio: {missing_ratio:.2%} > {self.schema.max_missing_ratio:.2%}",
+                            message=(
+                                f"Missing values exceed the allowed ratio:"
+                                f" {missing_ratio:.2%} > {self.schema.max_missing_ratio:.2%}"
+                            ),
                         )
                     )
                 else:
@@ -255,7 +260,10 @@ class DataValidator:
                     ValidationIssue(
                         severity=Severity.ERROR,
                         column=column,
-                        message=f"Column '{column}' could not be coerced to numeric values ({invalid_count} invalid rows).",
+                        message=(
+                            f"Column '{column}' could not be coerced to"
+                            f" numeric values ({invalid_count} invalid rows)."
+                        ),
                     )
                 )
         return issues

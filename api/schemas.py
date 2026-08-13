@@ -20,16 +20,19 @@ class FreightLoad(BaseModel):
     """
 
     pickup: str = Field(
-        ..., min_length=1,
+        ...,
+        min_length=1,
         description="Origin city. Case-insensitive — 'LEXINGTON' and 'lexington' both work.",
     )
     delivery: str = Field(
-        ..., min_length=1,
+        ...,
+        min_length=1,
         description="Destination city. Case-insensitive.",
     )
     distance: float = Field(..., gt=0, description="Route distance in miles.")
     equipment: str = Field(
-        ..., min_length=1,
+        ...,
+        min_length=1,
         description="Equipment type. Case-insensitive — 'dry van', 'DRY VAN', 'Dry Van' are all valid.",
     )
     weight: float = Field(..., gt=0, description="Load weight in pounds.")
@@ -43,16 +46,18 @@ class FreightLoad(BaseModel):
     market_index: float | None = Field(None, description="Spot market index signal.")
     quote_signal: float | None = Field(None, description="Historical quote-level signal.")
 
-    model_config = {"json_schema_extra": {
-        "example": {
-            "pickup": "Lexington",
-            "delivery": "Fort Wayne",
-            "distance": 360.0,
-            "equipment": "Dry Van",
-            "weight": 32000.0,
-            "date": "2025-12-15",
+    model_config = {
+        "json_schema_extra": {
+            "example": {
+                "pickup": "Lexington",
+                "delivery": "Fort Wayne",
+                "distance": 360.0,
+                "equipment": "Dry Van",
+                "weight": 32000.0,
+                "date": "2025-12-15",
+            }
         }
-    }}
+    }
 
 
 class PredictionResponse(BaseModel):

@@ -7,7 +7,7 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 
-from api.services.model_service import load_model, is_model_available
+from api.services.model_service import is_model_available, load_model
 
 logger = logging.getLogger("spotter.api.lifespan")
 
